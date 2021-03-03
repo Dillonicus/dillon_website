@@ -17,10 +17,9 @@ organizations:
 # bio: 
 
 # Interests to show in About widget
-# interests:
-# - Poop
-# - Farts
-# - Other things
+interests:
+- Different types of beans
+- Other things
 
 # Education to show in About widget
 education:
