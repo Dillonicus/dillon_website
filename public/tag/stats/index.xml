@@ -1,0 +1,141 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>stats | Dillon Corrigan</title>
+    <link>https://dillonicus.github.io/tag/stats/</link>
+      <atom:link href="https://dillonicus.github.io/tag/stats/index.xml" rel="self" type="application/rss+xml" />
+    <description>stats</description>
+    <generator>Wowchemy (https://wowchemy.com)</generator><language>en-us</language><lastBuildDate>Tue, 02 Mar 2021 00:00:00 +0000</lastBuildDate>
+    <image>
+      <url>https://dillonicus.github.io/images/icon_hua2ec155b4296a9c9791d015323e16eb5_11927_512x512_fill_lanczos_center_2.png</url>
+      <title>stats</title>
+      <link>https://dillonicus.github.io/tag/stats/</link>
+    </image>
+    
+    <item>
+      <title>multinomss</title>
+      <link>https://dillonicus.github.io/project/multinomss/</link>
+      <pubDate>Tue, 02 Mar 2021 00:00:00 +0000</pubDate>
+      <guid>https://dillonicus.github.io/project/multinomss/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Detecting Clusters in Space-Time with multinomss</title>
+      <link>https://dillonicus.github.io/post/multinomss/</link>
+      <pubDate>Tue, 23 Feb 2021 00:00:00 +0000</pubDate>
+      <guid>https://dillonicus.github.io/post/multinomss/</guid>
+      <description>
+
+
+&lt;div id=&#34;overview&#34; class=&#34;section level2&#34;&gt;
+&lt;h2&gt;Overview&lt;/h2&gt;
+&lt;p&gt;This post summarizes the capstone (plan B) project I completed as student in the &lt;a href=&#34;https://www.sph.umn.edu/academics/divisions/biostatistics/&#34;&gt;Division of Biostatistics&lt;/a&gt; at the &lt;a href=&#34;https://www.sph.umn.edu/&#34;&gt;University of Minnesota School of Public Health&lt;/a&gt;.&lt;/p&gt;
+&lt;p&gt;Spatial and space-time scan statistics are commonly used in epidemiology, veterinary population medicine, and other disciplines that rely on geospatial data to determine whether point processes are random or if clustering of points can be detected. To this end, I developed an R package, &lt;code&gt;multinomss&lt;/code&gt;, that implements the multinomial space-time scan statistic and produces easy-to-read results and interactive visualizations. &lt;a href=&#34;http://raptor.umn.edu&#34;&gt;The Raptor Center&lt;/a&gt; (TRC) at the University of Minnesota &lt;a href=&#34;http://vetmed.umn.edu&#34;&gt;College of Veterinary Medicine&lt;/a&gt; conducts research to identify emerging and persistent environmental issues related to raptor health. I will demonstrate the application of &lt;code&gt;multinomss&lt;/code&gt; using TRC data and show equivalency to the results obtained via SaTScan, a popular stand-alone software that unfortunately is not open-source. Statistical and computational limitations of the multinomial space-time scan statistic will also be discussed.&lt;/p&gt;
+&lt;div id=&#34;outline&#34; class=&#34;section level3&#34;&gt;
+&lt;h3&gt;Outline&lt;/h3&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;a href=&#34;#introduction&#34;&gt;Introduction&lt;/a&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;a href=&#34;#multinomial&#34;&gt;Multinomial Scan Statistic&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;#software&#34;&gt;Software Review&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;#multinomss&#34;&gt;Introduction to &lt;code&gt;multinomss&lt;/code&gt;&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;#trc&#34;&gt;Case Study&lt;/a&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;a href=&#34;#data&#34;&gt;Data&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;#discussion&#34;&gt;Discussion&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;div id=&#34;introduction&#34; class=&#34;section level2&#34;&gt;
+&lt;h2&gt;Introduction to the Scan Statistic&lt;/h2&gt;
+&lt;p&gt;Broadly, scan statistics comprise a group of methods used to determine whether or not a point process is random. If a point process is not random, this means there is some kind of clustering of the data. Various flavors of scan statistics have been developed to accommodate different distributional assumptions made about the underlying data generating process. This post (and my project) focus on the multinomial scan statistic.&lt;/p&gt;
+&lt;p&gt;Scan statistics are applicable to one, two, and three dimensional spaces:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;One-dimensional: points on a line&lt;/li&gt;
+&lt;li&gt;Two-dimensional: points on a plane&lt;/li&gt;
+&lt;li&gt;Three-dimensional: points on a plane changing over time&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;For the two- and three-dimensional cases, these points can be organized into regions of space and/or time called “scanning windows” (&lt;a href=&#34;#fig1&#34;&gt;fig. 1&lt;/a&gt;). These scanning windows are then varied in size and/or height to capture different sets of points for which the scan statistic is calculated.&lt;/p&gt;
+&lt;div id=&#34;fig1&#34; class=&#34;section level3&#34;&gt;
+&lt;h3&gt;&lt;/h3&gt;
+&lt;div class=&#34;figure&#34;&gt;&lt;span id=&#34;fig:unnamed-chunk-2&#34;&gt;&lt;/span&gt;
+&lt;img src=&#34;images/cluster_image.png&#34; alt=&#34;Example of Scanning Windows&#34; width=&#34;1353&#34; /&gt;
+&lt;p class=&#34;caption&#34;&gt;
+Figure 1: Example of Scanning Windows
+&lt;/p&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;div id=&#34;multinomial&#34; class=&#34;section level3&#34;&gt;
+&lt;h3&gt;Multinomial Scan Statistic&lt;/h3&gt;
+&lt;p&gt;Scan statistics have been applied to Poisson, Bernoulli, exponential, Gaussian/Normal, ordinal, and multinomial data. The simplest case is the Bernoulli scan statistic, which is used when observations belong to one of two categories (often cases vs. controls). The multinomial scan statistic is an extension of this, where observations belong to one of &amp;gt;2 categories (e.g. different types of cancer in a study area).&lt;/p&gt;
+&lt;p&gt;The multinomial scan statistic, as detailed by  is simply an extension of the likelihood ratio test statistic. Suppose we are interested in identifying potential clustering of observations within a study area and each observation can belong to one of &lt;span class=&#34;math inline&#34;&gt;\(K\)&lt;/span&gt; different groups. The number of observations in the study area belonging to group &lt;span class=&#34;math inline&#34;&gt;\(k\)&lt;/span&gt; is defined as &lt;span class=&#34;math inline&#34;&gt;\(C_k\)&lt;/span&gt;, where the total number of observations in the study area is &lt;span class=&#34;math inline&#34;&gt;\(\sum_{k}{C_k} = C\)&lt;/span&gt;. Within a given scanning window &lt;span class=&#34;math inline&#34;&gt;\(Z\)&lt;/span&gt;, the number of observations belonging to group &lt;span class=&#34;math inline&#34;&gt;\(k\)&lt;/span&gt; is &lt;span class=&#34;math inline&#34;&gt;\(C_k(Z)\)&lt;/span&gt;. It follows that the total number of observations within scanning window &lt;span class=&#34;math inline&#34;&gt;\(Z\)&lt;/span&gt; is &lt;span class=&#34;math inline&#34;&gt;\(\sum_k{C_k(Z)} = C(Z)\)&lt;/span&gt;. Under the null hypothesis of the likelihood ratio test, the probability of an observation being in group &lt;span class=&#34;math inline&#34;&gt;\(k\)&lt;/span&gt; inside scanning window &lt;span class=&#34;math inline&#34;&gt;\(Z\)&lt;/span&gt; (&lt;span class=&#34;math inline&#34;&gt;\(p_k\)&lt;/span&gt;) is equal to the probability of an observation belonging to group &lt;span class=&#34;math inline&#34;&gt;\(k\)&lt;/span&gt; outside of scanning window &lt;span class=&#34;math inline&#34;&gt;\(Z\)&lt;/span&gt; (&lt;span class=&#34;math inline&#34;&gt;\(q_k\)&lt;/span&gt;) for all &lt;span class=&#34;math inline&#34;&gt;\(K\)&lt;/span&gt; groups:
+&lt;span class=&#34;math display&#34;&gt;\[H_0: p_1 = q_1, \dots , p_K = q_K. \]&lt;/span&gt;
+The alternative hypothesis is that for at least one of the &lt;span class=&#34;math inline&#34;&gt;\(K\)&lt;/span&gt; groups, this equality does not hold. The maximum likelihood estimators of &lt;span class=&#34;math inline&#34;&gt;\(p_k\)&lt;/span&gt; and &lt;span class=&#34;math inline&#34;&gt;\(q_k\)&lt;/span&gt; are simply the proportion of observations in scanning window &lt;span class=&#34;math inline&#34;&gt;\(Z\)&lt;/span&gt; that belong to group &lt;span class=&#34;math inline&#34;&gt;\(k\)&lt;/span&gt; and the proportion of observations not in scanning window &lt;span class=&#34;math inline&#34;&gt;\(Z\)&lt;/span&gt; that belong to group &lt;span class=&#34;math inline&#34;&gt;\(k\)&lt;/span&gt;, respectively:
+&lt;span class=&#34;math display&#34;&gt;\[\hat{p}_k = \frac{C_k(Z)}{C(Z)} \ \text{and} \ \hat{q}_k = \frac{C_k - C_k(Z)}{C - C(Z)}.\]&lt;/span&gt;&lt;/p&gt;
+&lt;p&gt;The likelihood ratio test statistic for scanning window &lt;span class=&#34;math inline&#34;&gt;\(Z\)&lt;/span&gt; can then be computed to have the form&lt;/p&gt;
+&lt;p&gt;&lt;span class=&#34;math display&#34; id=&#34;eq:lrt&#34;&gt;\[
+\begin{equation}
+\log \lambda_{Z} = \sum_{k} \left\{ C_k(Z) \log\left( \frac{C_k(Z)}{C(Z)} \right) + (C_k - C_k(Z)) log\left( \frac{C_k - C_k(Z)}{C - C(Z)} \right) \right\} - \sum_{k} C_k log \left( \frac{C_k}{C} \right)
+\tag{1}
+\end{equation}
+\]&lt;/span&gt;
+the form shown in Equation &lt;a href=&#34;#eq:lrt&#34;&gt;(1)&lt;/a&gt;
+The scanning window with the largest test statistic &lt;span class=&#34;math inline&#34;&gt;\(\log \lambda_{Z}\)&lt;/span&gt; is the most likely cluster.&lt;/p&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;div id=&#34;software&#34; class=&#34;section level2&#34;&gt;
+&lt;h2&gt;Review of Existing Software&lt;/h2&gt;
+&lt;p&gt;SaTScan is a stand-alone software that was developed by Martin Kulldorff in 1997. This program implements many flavors of the scan statistic, is feature-rich and has been highly optimized over time. However, it is &lt;em&gt;NOT&lt;/em&gt; open source. There are some existing &lt;code&gt;R&lt;/code&gt; packages that have been developed as an open-source alternative to SaTScan, namely:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;code&gt;smerc&lt;/code&gt; (spatial data only)&lt;br /&gt;
+&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;SpatialEpi&lt;/code&gt; (spatial data only)&lt;br /&gt;
+&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;Scanstatistics&lt;/code&gt; (Bernoulli and Poisson data only)&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;For this project, I developed an open source &lt;code&gt;R&lt;/code&gt; package that&lt;/p&gt;
+&lt;/div&gt;
+&lt;div id=&#34;multinomss&#34; class=&#34;section level2&#34;&gt;
+&lt;h2&gt;Introduction to &lt;code&gt;multinomss&lt;/code&gt;&lt;/h2&gt;
+&lt;p&gt;The multinomss package includes functions that allow users to detect spatiotemporal clusters in multinomial data using the retrospective space-time scan statistic. Like the other R packages discussed above, this package integrates  code via   to allay the computational burden inherent to scan statistics. The package also includes functions to produce interactive visualizations of clusters using the &lt;code&gt;leaflet&lt;/code&gt; package. Source code for the &lt;code&gt;multinomss&lt;/code&gt; package is available on &lt;a href=&#34;https://github.com/Dillonicus/multinomss&#34;&gt;GitHub&lt;/a&gt; and can be installed in &lt;code&gt;R&lt;/code&gt; using the &lt;code&gt;devtools&lt;/code&gt; package:&lt;/p&gt;
+&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;devtools::install_github(&amp;quot;Dillonicus/multinomss&amp;quot;)&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;The analysis pipeline in &lt;code&gt;multinomss&lt;/code&gt; consists of three primary steps: (1) identify cylindrical space-time windows through which to scan; (2) determine the most likely cluster; and (3) conduct Monte Carlo simulation for calculation of p-values (&lt;a href=&#34;#fig2&#34;&gt;fig. 2&lt;/a&gt;). These steps can be carried out using the core functions of &lt;code&gt;multinomss&lt;/code&gt;.&lt;/p&gt;
+&lt;div id=&#34;fig2&#34; class=&#34;section level3&#34;&gt;
+&lt;h3&gt;&lt;/h3&gt;
+&lt;div class=&#34;figure&#34;&gt;&lt;span id=&#34;fig:unnamed-chunk-4&#34;&gt;&lt;/span&gt;
+&lt;img src=&#34;images/flowchart.png&#34; alt=&#34;Analysis pipeline in `multinoms`&#34; width=&#34;1736&#34; /&gt;
+&lt;p class=&#34;caption&#34;&gt;
+Figure 2: Analysis pipeline in &lt;code&gt;multinoms&lt;/code&gt;
+&lt;/p&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;div id=&#34;trc&#34; class=&#34;section level2&#34;&gt;
+&lt;h2&gt;Case Study&lt;/h2&gt;
+&lt;p&gt;The Raptor Center (TRC) at the University of Minnesota College of Veterinary Medicine was established in 1974 as a medical clinic, educational center, and veterinary training facility. In addition to treating around 1,000 sick and injured birds of prey annually, TRC conducts research to identify emerging and persistent environmental issues related to raptor health. Since 1990, TRC has maintained an electronic medical database on rehabilitated animals. These data, along with data from partnering organizations such as the Wildlife Rehabilitation Center of Minnesota (WRC), are invaluable to our understanding of drivers of health in wildlife populations.&lt;/p&gt;
+&lt;div id=&#34;data&#34; class=&#34;section level3&#34;&gt;
+&lt;h3&gt;Data&lt;/h3&gt;
+&lt;p&gt;The data used in this case study come from a subset of 5,876 raptors that were admitted to TRC between January 2013 and September 2018. Upon admission to TRC, each bird is assigned a unique identification number and the species and admission date are recorded. Some birds also have information about the location from which they were recovered. As this is a space-time analysis, only birds with an associated recovery location are considered in this case study. The final analysis set is comprised of n = 3,810 raptors admitted to TRC between October 2014 and September 2018 for which the recovery location is available. Few isolated observations are located outside of the Upper Midwest (&lt;a href=&#34;#fig3&#34;&gt;fig. 3&lt;/a&gt;). There is no indication that the locations associated with these observations are erroneous. Due to the sparsity of these observations, they are unlikely to be captured in any significant clusters. Inclusion of these points in the analysis will slightly inflate the value of the likelihood ratio statistic under the null hypothesis, but not to an extent that will alter the final results.&lt;/p&gt;
+&lt;/div&gt;
+&lt;div id=&#34;fig3&#34; class=&#34;section level3&#34;&gt;
+&lt;h3&gt;&lt;/h3&gt;
+&lt;div class=&#34;figure&#34;&gt;&lt;span id=&#34;fig:unnamed-chunk-5&#34;&gt;&lt;/span&gt;
+&lt;img src=&#34;images/map1.png&#34; alt=&#34;Map of data used in analysis&#34; width=&#34;725&#34; /&gt;
+&lt;p class=&#34;caption&#34;&gt;
+Figure 3: Map of data used in analysis
+&lt;/p&gt;
+&lt;/div&gt;
+&lt;p&gt;&lt;img src=&#34;images/satscan_clustermap.png&#34; width=&#34;50%&#34; style=&#34;display: inline-block; padding:10px&#34; /&gt;&lt;img src=&#34;images/multinomss_clustermap.png&#34; width=&#34;50%&#34; style=&#34;display: inline-block; padding:10px&#34; /&gt;&lt;/p&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;div id=&#34;discussion&#34; class=&#34;section level2&#34;&gt;
+&lt;h2&gt;Discussion&lt;/h2&gt;
+&lt;/div&gt;
+</description>
+    </item>
+    
+  </channel>
+</rss>

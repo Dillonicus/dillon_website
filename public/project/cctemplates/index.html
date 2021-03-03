@@ -1,0 +1,1198 @@
+<!DOCTYPE html><html lang="en-us" >
+
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  
+  
+  
+    <meta name="generator" content="Wowchemy 5.0.0-beta.3 for Hugo" />
+  
+
+  
+
+  
+  
+
+  
+  
+  
+  
+  
+    
+    
+    
+  
+  
+
+  <meta name="author" content="Dillon Corrigan" />
+
+  
+  
+  
+    
+  
+  <meta name="description" content="An R package for document output" />
+
+  
+  <link rel="alternate" hreflang="en-us" href="https://dillonicus.github.io/project/cctemplates/" />
+
+  
+
+
+
+
+
+
+
+  
+
+
+
+
+  
+  
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  
+
+  
+  
+  
+    <meta name="theme-color" content="#1565c0" />
+  
+
+  
+  
+    
+    <script src="/js/mathjax-config.js"></script>
+  
+
+  
+  
+  
+  
+    
+    
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.14.0/css/all.min.css" integrity="sha256-FMvZuGapsJLjouA6k7Eo2lusoAX9i0ShlWFG6qt7SLc=" crossorigin="anonymous">
+
+    
+    
+
+    
+    
+    
+      
+    
+    
+      
+      
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/10.2.0/styles/atom-one-light.min.css" crossorigin="anonymous" title="hl-light" media="print" onload="this.media='all'">
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/10.2.0/styles/atom-one-light.min.css" crossorigin="anonymous" title="hl-dark" media="print" onload="this.media='all'" disabled>
+      
+    
+
+    
+    
+    
+      <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.7.1/leaflet.min.css" integrity="sha512-1xoFisiGdy9nvho8EgXuXvnpR5GAMSjFwp40gSRE3NwdUdIMIKuPa7bqoUhLD0O/5tPNhteAsE5XyyMi5reQVA==" crossorigin="anonymous" media="print" onload="this.media='all'">
+    
+
+    
+
+    
+    
+      
+      
+
+      
+      
+
+      
+    
+      
+      
+
+      
+      
+
+      
+    
+      
+      
+
+      
+      
+
+      
+    
+      
+      
+
+      
+      
+
+      
+    
+      
+      
+
+      
+      
+
+      
+    
+      
+      
+
+      
+      
+
+      
+    
+      
+      
+
+      
+      
+
+      
+    
+      
+      
+
+      
+      
+
+      
+    
+      
+      
+
+      
+      
+
+      
+    
+      
+      
+
+      
+      
+
+      
+    
+      
+      
+
+      
+      
+
+      
+    
+      
+      
+
+      
+      
+
+      
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/lazysizes/5.2.2/lazysizes.min.js" integrity="sha512-TmDwFLhg3UA4ZG0Eb4MIyT1O1Mb+Oww5kFG0uHqXsdbyZz9DcvYQhKpGgNkamAI6h2lGGZq2X8ftOJvF/XjTUg==" crossorigin="anonymous" async></script>
+      
+    
+      
+      
+
+      
+      
+
+      
+    
+      
+      
+
+      
+      
+
+      
+    
+      
+      
+
+      
+      
+
+      
+        <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js" integrity="" crossorigin="anonymous" async></script>
+      
+    
+      
+      
+
+      
+      
+
+      
+    
+      
+      
+
+      
+      
+
+      
+    
+  
+
+  
+  
+  
+    
+      
+      <link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&family=Roboto+Mono&family=Roboto:wght@400;700&display=swap">
+      <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&family=Roboto+Mono&family=Roboto:wght@400;700&display=swap" media="print" onload="this.media='all'">
+    
+  
+
+  
+  
+  
+  
+  
+  <link rel="stylesheet" href="/css/wowchemy.9cd609d2cbf758ce79ca7a6a88fe3ce9.css" />
+
+  
+
+
+
+  
+
+  
+
+
+  
+  
+  
+
+  
+
+  
+    <link rel="manifest" href="/index.webmanifest" />
+  
+
+  <link rel="icon" type="image/png" href="/images/icon_hua2ec155b4296a9c9791d015323e16eb5_11927_32x32_fill_lanczos_center_2.png" />
+  <link rel="apple-touch-icon" type="image/png" href="/images/icon_hua2ec155b4296a9c9791d015323e16eb5_11927_180x180_fill_lanczos_center_2.png" />
+
+  <link rel="canonical" href="https://dillonicus.github.io/project/cctemplates/" />
+
+  
+  
+  
+  
+  
+  
+  
+    
+  
+  
+  <meta property="twitter:card" content="summary_large_image" />
+  
+  <meta property="og:site_name" content="Dillon Corrigan" />
+  <meta property="og:url" content="https://dillonicus.github.io/project/cctemplates/" />
+  <meta property="og:title" content="CCtemplates | Dillon Corrigan" />
+  <meta property="og:description" content="An R package for document output" /><meta property="og:image" content="https://dillonicus.github.io/project/cctemplates/featured.jpg" />
+    <meta property="twitter:image" content="https://dillonicus.github.io/project/cctemplates/featured.jpg" /><meta property="og:locale" content="en-us" />
+  
+    
+      <meta
+        property="article:published_time"
+        content="2016-04-27T00:00:00&#43;00:00"
+      />
+    
+    <meta property="article:modified_time" content="2016-04-27T00:00:00&#43;00:00">
+  
+
+  
+
+
+    
+
+
+
+
+
+
+
+
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "Article",
+  "mainEntityOfPage": {
+    "@type": "WebPage",
+    "@id": "https://dillonicus.github.io/project/cctemplates/"
+  },
+  "headline": "CCtemplates",
+  
+  "image": [
+    "https://dillonicus.github.io/project/cctemplates/featured.jpg"
+  ],
+  
+  "datePublished": "2016-04-27T00:00:00Z",
+  "dateModified": "2016-04-27T00:00:00Z",
+  
+  "author": {
+    "@type": "Person",
+    "name": "Dillon Corrigan"
+  },
+  
+  "publisher": {
+    "@type": "Organization",
+    "name": "Dillon Corrigan",
+    "logo": {
+      "@type": "ImageObject",
+      "url": "https://dillonicus.github.io/images/icon_hua2ec155b4296a9c9791d015323e16eb5_11927_192x192_fill_lanczos_center_2.png"
+    }
+  },
+  "description": "An R package for document output"
+}
+</script>
+
+  
+
+  
+
+  
+
+  
+
+
+
+
+
+  <title>CCtemplates | Dillon Corrigan</title>
+</head>
+
+
+<body id="top" data-spy="scroll" data-offset="70" data-target="#TableOfContents" class="page-wrapper  ">
+
+  
+  
+  
+  
+  
+  
+  
+  
+  <script src="/js/wowchemy-init.min.eca9bbc7a71accd5ebd9eee0ff004132.js"></script>
+
+  
+
+
+<aside class="search-modal" id="search">
+  <div class="container">
+    <section class="search-header">
+
+      <div class="row no-gutters justify-content-between mb-3">
+        <div class="col-6">
+          <h1>Search</h1>
+        </div>
+        <div class="col-6 col-search-close">
+          <a class="js-search" href="#" aria-label="Close"><i class="fas fa-times-circle text-muted" aria-hidden="true"></i></a>
+        </div>
+      </div>
+
+      <div id="search-box">
+        
+        <input name="q" id="search-query" placeholder="Search..." autocapitalize="off"
+        autocomplete="off" autocorrect="off" spellcheck="false" type="search" class="form-control"
+        aria-label="Search...">
+        
+      </div>
+
+      
+      
+
+      
+
+    </section>
+    <section class="section-search-results">
+
+      <div id="search-hits">
+        
+      </div>
+
+    </section>
+  </div>
+</aside>
+
+
+
+  <div class="page-header">
+    
+<nav class="navbar navbar-light fixed-top navbar-expand-lg py-0" id="navbar-main">
+  <div class="container">
+
+    
+      <a class="navbar-brand" href="/">Dillon Corrigan</a>
+      
+      <button type="button" class="navbar-toggler" data-toggle="collapse"
+              data-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
+        <span><i class="fas fa-bars"></i></span>
+      </button>
+      
+
+    
+    <div class="collapse navbar-collapse" id="navbar">
+
+      
+      
+      <ul class="navbar-nav ml-auto">
+        
+
+        
+
+        
+        
+        
+          
+        
+
+        
+        
+        
+        
+        
+        
+
+        <li class="nav-item">
+          <a class="nav-link " href="/contact/"><span>About/Contact</span></a>
+        </li>
+
+        
+        
+
+        
+
+        
+        
+        
+          
+        
+
+        
+        
+        
+        
+        
+        
+
+        <li class="nav-item">
+          <a class="nav-link " href="/post/"><span>Posts</span></a>
+        </li>
+
+        
+        
+
+        
+
+        
+        
+        
+          
+        
+
+        
+        
+        
+        
+        
+        
+
+        <li class="nav-item">
+          <a class="nav-link  active" href="/project/"><span>Projects</span></a>
+        </li>
+
+        
+        
+
+      
+
+        
+
+        
+        <li class="nav-item">
+          <a class="nav-link js-search" href="#"><i class="fas fa-search" aria-hidden="true"></i></a>
+        </li>
+        
+
+        
+
+ 
+
+      </ul>
+
+    </div>
+  </div>
+</nav>
+
+  </div>
+
+  <div class="page-body">
+    <article class="article article-project">
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    
+  
+
+
+<div class="article-container pt-3">
+  <h1>CCtemplates</h1>
+
+  
+
+  
+
+
+<div class="article-metadata">
+
+  
+  
+
+  
+  <span class="article-date">
+    
+    
+      
+    
+    Apr 27, 2016
+  </span>
+  
+
+  
+
+  
+
+  
+  
+  
+  
+  
+  
+
+  
+  
+
+</div>
+
+  
+
+
+
+
+<div class="btn-links mb-3">
+  
+  
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+  
+  
+    
+  
+<a class="btn btn-outline-primary btn-page-header" href="https://www.github.com/dillonicus/cctemplates" target="_blank" rel="noopener">
+  Code
+</a>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</div>
+
+
+</div>
+
+
+<div class="article-header article-container featured-image-wrapper mt-4 mb-4" style="max-width: 720px; max-height: 405px;">
+  <div style="position: relative">
+    <img src="/project/cctemplates/featured_hu3d03a01dcc18bc5be0e67db3d8d209a6_224363_720x0_resize_q75_lanczos.jpg" alt="" class="featured-image">
+    <span class="article-header-caption">Photo by rawpixel on Unsplash</span>
+  </div>
+</div>
+
+
+
+  <div class="article-container">
+
+    <div class="article-style">
+      <h1 id="cctemplates">CCtemplates</h1>
+<!-- badges: start -->
+<!-- badges: end -->
+<p>This R package provides ready-to-use HTML and PDF output formats and templates for RMarkdown documents, with a focus on generating standardized statistical reports for the Cleveland Clinic.</p>
+<h2 id="formats-gallery">Formats gallery</h2>
+<p>The package provides HTML and PDF output formats. Examples of these will be added later.</p>
+<h3 id="html_report"><code>html_report</code></h3>
+<p>Adapted from the <a href="https://bookdown.org/" target="_blank" rel="noopener">bookdown</a> theme. Fully responsive with a dynamic table of contents and collapsible navigation. Also includes ability to export HTML as a formatted MS Word document using JavaScript.</p>
+<h3 id="pdf_report"><code>pdf_report</code></h3>
+<p>Generates a PDF document with branded header and subject block.</p>
+<h2 id="installation">Installation</h2>
+<p>The latest version of the package can be downloaded from GitHub:</p>
+<pre><code class="language-r">install.packages('remotes') # if necessary
+remotes::install_github(&quot;dillonicus/CCtemplates&quot;)
+</code></pre>
+<h2 id="starting-a-new-project">Starting a new project</h2>
+<p>To start a new project, simply use the <code>CCtemplates::project_create</code> function. This function takes various information about the project, generates a unique project ID, then creates a project directory and sub-folders containing pre-populated <code>rmarkdown</code>, R, and SAS files. A document entitled &lsquo;project_list.csv&rsquo; will also be created in the main directory to track projects created with this function.</p>
+<p>The function requires several arguments:</p>
+<ul>
+<li><code>project_folder</code>: Main project folder directory (where all projects are created/stored). Defaults to the default non-project directory in RStudio; and</li>
+<li><code>client_name</code>: Name of the client/PI of the project. Used to generate project ID.</li>
+</ul>
+<p>Additional arguments can be supplied to give more details about the project:</p>
+<ul>
+<li><code>client_email</code>: Email of the client/PI;</li>
+<li><code>statistician_name</code>: Name of the lead statistician;</li>
+<li><code>statistician_email</code>: Email of the lead statistician;</li>
+<li><code>programmer</code>: Name of the statistical programmer (if applicable);</li>
+<li><code>department</code>: Indicates which department the project is for. This will create a sub-folder within the main project directory if one does not already exist;</li>
+<li><code>project_title</code>: Optional title for the project;</li>
+<li><code>start_date</code>: Start date of the project. Default is today&rsquo;s date;</li>
+<li><code>version</code>: Version number of the project. Default is &lsquo;1.0&rsquo;;</li>
+<li><code>notes</code>: Any general notes about the project; and</li>
+<li><code>output_format</code>: Changes the output format of the <code>rmarkdown</code> file created in the &lsquo;memo&rsquo; folder. Options are &lsquo;html&rsquo; (default) or &lsquo;pdf&rsquo;.</li>
+</ul>
+<pre><code class="language-r">CCtemplates::project_create(
+  project_folder = &quot;~/&quot;, 
+  start_date = Sys.Date(), 
+  client_name = &quot;Client Name&quot;, 
+  client_email = &quot;client_name@ccf.org&quot;,
+  statistician_name = &quot;Dillon Corrigan&quot;, 
+  statistician_email = &quot;corrigand3@ccf.org&quot;, 
+  programmer = &quot;Programmer Name&quot;, 
+  version = &quot;1.0&quot;, 
+  department = &quot;GUKI&quot;, 
+  project_title = &quot;Test Project&quot;, 
+  output_format = &quot;html&quot;, 
+  notes = &quot;This is not a real project&quot;
+  )
+</code></pre>
+<h2 id="removing-a-completed-project">Removing a completed project</h2>
+<p>Projects can also be archived and/or deleted from the main project file using the <code>CCtemplates::project_remove</code> function.</p>
+<p>The function requires several arguments:</p>
+<ul>
+<li><code>project_folder</code>: Main project folder directory (where all projects are created/stored). Defaults to the default non-project directory in RStudio; and</li>
+<li><code>project_id</code>: The ID of the project you wish to archive/remove. This is stored and looked up in the &lsquo;project_list.csv&rsquo; file created by <code>CCtemplates::project_create()</code>.</li>
+</ul>
+<p>An additional argument, <code>keep_zip</code>, indicates whether you would like to archive the project prior to deletion. If set to <code>TRUE</code> (default), all project files will be added to a .zip archive and copied to a sub-folder of the main project folder directory called &lsquo;Completed.&rsquo; If set to <code>FALSE</code>, no archive will be made and all files will be deleted. If set to <code>FALSE</code> the user will be prompted twice to confirm deletion without archive before proceeding.</p>
+<pre><code class="language-r">CCtemplates::project_remove(
+  project_folder = &quot;~/Projects&quot;,
+  project_id = &quot;D1234&quot;,
+  keep_zip = TRUE
+  )
+</code></pre>
+<h2 id="creating-a-new-document">Creating a new document</h2>
+<p>Create a new <code>Rmd</code> file and add the following to the YAML preamble:</p>
+<pre><code class="language-r">---
+output: CCtemplates::&lt;template name&gt;
+---
+</code></pre>
+<p>Within RStudio, you can also choose <code>File</code> &gt; <code>New File...</code> &gt; <code>R Markdown...</code> then select <code>From Template</code>. You should then be able to create a new document from one of the package templates.</p>
+<h2 id="options">Options</h2>
+<p>Depending on output format, additional metadata and output options can be specified in the YAML preamble.</p>
+<h3 id="metadata">Metadata</h3>
+<ul>
+<li><code>title</code></li>
+<li><code>date</code></li>
+<li><code>project</code></li>
+<li><code>version</code></li>
+<li><code>client</code>: PI for project. Name and email can be specified as list of entries under the <code>client</code> field.</li>
+<li><code>statistician</code>: Statistician preparing report. Name and email can be specified as a list of entries under the <code>statistician</code> field.</li>
+</ul>
+<h3 id="output-formatting">Output formatting</h3>
+<ul>
+<li><code>fig_width</code>: figures width, in inches</li>
+<li><code>fig_height</code>: figures width, in inches</li>
+<li><code>fig_caption</code>: toggle figure caption rendering</li>
+<li><code>highlight</code>: syntax highlighting</li>
+<li><code>thumbnails</code>: if TRUE, display content images as thumbnails</li>
+<li><code>lightbox</code>: if TRUE, add lightbox effect to content images</li>
+<li><code>gallery</code>: if TRUE, add navigation between images when displayed in lightbox</li>
+<li><code>use_bookdown</code>: if TRUE, will use <code>bookdown</code> instead of <code>rmarkdown</code> for HTML rendering (adds section numbering and cross-referencing)</li>
+</ul>
+<pre><code class="language-r">---
+title: &quot;Test Project&quot;
+date: &quot;`r Sys.Date()`&quot;
+project: 
+ - id: &quot;D1234&quot;
+version: &quot;1.0&quot;
+client: 
+ - name: &quot;Client Name&quot;
+   email: &quot;client_name@ccf.org&quot;
+statistician: 
+ - name: &quot;Dillon Corrigan&quot;
+   email: &quot;corrigd3@ccf.org&quot;
+output: CCtemplates::html_report
+---
+</code></pre>
+<h2 id="credits">Credits</h2>
+<ul>
+<li>The CSS for <code>html_report</code> is directly derived from the <a href="https://bookdown.org" target="_blank" rel="noopener">bookdown</a> project template.</li>
+<li>JavaScript and HTML code for code folding and tabbed sections are taken from RStudio&rsquo;s default <code>rmarkdown</code> HTML template.</li>
+<li>The <a href="https://github.com/juba/rmdformats" target="_blank" rel="noopener">rmdformats</a> package served as a general reference for the <code>html_report</code> format.</li>
+</ul>
+
+    </div>
+
+    
+
+
+
+
+
+
+<div class="article-tags">
+  
+  <a class="badge badge-light" href="/tag/software/">software</a>
+  
+</div>
+
+
+
+<div class="share-box" aria-hidden="true">
+  <ul class="share">
+    
+      
+      
+      
+        
+      
+      
+      
+      <li>
+        <a href="https://twitter.com/intent/tweet?url=https://dillonicus.github.io/project/cctemplates/&amp;text=CCtemplates" target="_blank" rel="noopener" class="share-btn-twitter">
+          <i class="fab fa-twitter"></i>
+        </a>
+      </li>
+    
+      
+      
+      
+        
+      
+      
+      
+      <li>
+        <a href="https://www.facebook.com/sharer.php?u=https://dillonicus.github.io/project/cctemplates/&amp;t=CCtemplates" target="_blank" rel="noopener" class="share-btn-facebook">
+          <i class="fab fa-facebook"></i>
+        </a>
+      </li>
+    
+      
+      
+      
+        
+      
+      
+      
+      <li>
+        <a href="mailto:?subject=CCtemplates&amp;body=https://dillonicus.github.io/project/cctemplates/" target="_blank" rel="noopener" class="share-btn-email">
+          <i class="fas fa-envelope"></i>
+        </a>
+      </li>
+    
+      
+      
+      
+        
+      
+      
+      
+      <li>
+        <a href="https://www.linkedin.com/shareArticle?url=https://dillonicus.github.io/project/cctemplates/&amp;title=CCtemplates" target="_blank" rel="noopener" class="share-btn-linkedin">
+          <i class="fab fa-linkedin-in"></i>
+        </a>
+      </li>
+    
+      
+      
+      
+        
+      
+      
+      
+      <li>
+        <a href="whatsapp://send?text=CCtemplates%20https://dillonicus.github.io/project/cctemplates/" target="_blank" rel="noopener" class="share-btn-whatsapp">
+          <i class="fab fa-whatsapp"></i>
+        </a>
+      </li>
+    
+      
+      
+      
+        
+      
+      
+      
+      <li>
+        <a href="https://service.weibo.com/share/share.php?url=https://dillonicus.github.io/project/cctemplates/&amp;title=CCtemplates" target="_blank" rel="noopener" class="share-btn-weibo">
+          <i class="fab fa-weibo"></i>
+        </a>
+      </li>
+    
+  </ul>
+</div>
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+
+
+
+  
+  
+  
+    
+  
+  
+  
+  <div class="media author-card content-widget-hr">
+    
+      
+      <a href="https://dillonicus.github.io/"><img class="avatar mr-3 avatar-circle" src="/author/dillon-corrigan/avatar_hu8f7d2caa6adede0fcc9366076854a1e9_223511_270x270_fill_q75_lanczos_center.jpg" alt="Dillon Corrigan"></a>
+    
+
+    <div class="media-body">
+      <h5 class="card-title"><a href="https://dillonicus.github.io/">Dillon Corrigan</a></h5>
+      <h6 class="card-subtitle">Biostatistician</h6>
+      
+      <ul class="network-icon" aria-hidden="true">
+  
+    
+    
+    
+      
+    
+    
+    
+    
+    
+      
+    
+    <li>
+      <a href="/contact" >
+        <i class="fas fa-envelope"></i>
+      </a>
+    </li>
+  
+    
+    
+    
+      
+    
+    
+    
+    
+    
+      
+    
+    <li>
+      <a href="https://github.com/dillonicus" target="_blank" rel="noopener">
+        <i class="fab fa-github"></i>
+      </a>
+    </li>
+  
+    
+    
+    
+      
+    
+    
+    
+    
+    
+      
+    
+    <li>
+      <a href="https://www.linkedin.com/in/dilloncorrigan" target="_blank" rel="noopener">
+        <i class="fab fa-linkedin"></i>
+      </a>
+    </li>
+  
+</ul>
+
+    </div>
+  </div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <div class="article-widget content-widget-hr">
+    <h3>Related</h3>
+    <ul>
+      
+      <li><a href="/project/multinomss/">multinomss</a></li>
+      
+      <li><a href="/post/multinomss/">Detecting Clusters in Space-Time with multinomss</a></li>
+      
+    </ul>
+  </div>
+  
+
+
+
+
+
+    <div class="project-related-pages content-widget-hr">
+      
+      
+
+      
+      
+      
+
+      
+      
+      
+
+      
+      
+      
+    </div>
+  </div>
+</article>
+  </div>
+
+  <div class="page-footer">
+    
+    
+    <div class="container">
+      <footer class="site-footer">
+  
+
+  <p class="powered-by">
+    
+  </p>
+
+  
+  
+
+
+
+
+
+
+  <p class="powered-by">
+    
+    
+    
+    Published with
+    <a href="https://wowchemy.com/?utm_campaign=poweredby" target="_blank" rel="noopener">Wowchemy</a>  —
+    the free, <a href="https://github.com/wowchemy/wowchemy-hugo-modules" target="_blank" rel="noopener">
+    open source</a> website builder that empowers creators.
+    
+  </p>
+</footer>
+
+    </div>
+    
+  </div>
+
+  
+<div id="modal" class="modal fade" role="dialog">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title">Cite</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <pre><code class="tex hljs"></code></pre>
+      </div>
+      <div class="modal-footer">
+        <a class="btn btn-outline-primary my-1 js-copy-cite" href="#" target="_blank">
+          <i class="fas fa-copy"></i> Copy
+        </a>
+        <a class="btn btn-outline-primary my-1 js-download-cite" href="#" target="_blank">
+          <i class="fas fa-download"></i> Download
+        </a>
+        <div id="modal-error"></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+      
+
+    
+    
+    
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.min.js" integrity="sha256-9/aliU8dGd2tb6OSsuzixeV4y/faTqgFtohetphbbj0=" crossorigin="anonymous"></script>
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/instant.page/5.1.0/instantpage.min.js" integrity="sha512-1+qUtKoh9XZW7j+6LhRMAyOrgSQKenQ4mluTR+cvxXjP1Z54RxZuzstR/H9kgPXQsVB8IW7DMDFUJpzLjvhGSQ==" crossorigin="anonymous"></script>
+
+      
+      
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.imagesloaded/4.1.4/imagesloaded.pkgd.min.js" integrity="sha256-lqvxZrPLtfffUl2G/e7szqSvPBILGbwmsGE1MKlOi0Q=" crossorigin="anonymous"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.isotope/3.0.6/isotope.pkgd.min.js" integrity="sha256-CBrpuqrMhXwcLLUd5tvQ4euBHCdh7wGlDfNz8vbu/iI=" crossorigin="anonymous"></script>
+      
+
+      
+      
+
+      
+
+      
+        
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/10.2.0/highlight.min.js" integrity="sha512-TDKKr+IvoqZnPzc3l35hdjpHD0m+b2EC2SrLEgKDRWpxf2rFCxemkgvJ5kfU48ip+Y+m2XVKyOCD85ybtlZDmw==" crossorigin="anonymous"></script>
+        
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/10.2.0/languages/r.min.js"></script>
+        
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/10.2.0/languages/python.min.js"></script>
+        
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/10.2.0/languages/latex.min.js"></script>
+        
+      
+
+    
+
+    
+    
+    
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.7.1/leaflet.min.js" integrity="sha512-SeiQaaDh73yrb56sTW/RgVdi/mMqNeM2oBwubFHagc5BkixSpP1fvqF47mKzPGWYSSy4RwbBunrJBQ4Co8fRWA==" crossorigin="anonymous"></script>
+    
+
+    
+    
+
+    
+    
+    
+      
+      <script id="search-hit-fuse-template" type="text/x-template">
+        <div class="search-hit" id="summary-{{key}}">
+          <div class="search-hit-content">
+            <div class="search-hit-name">
+              <a href="{{relpermalink}}">{{title}}</a>
+              <div class="article-metadata search-hit-type">{{type}}</div>
+              <p class="search-hit-description">{{snippet}}</p>
+            </div>
+          </div>
+        </div>
+      </script>
+      
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/fuse.js/3.2.1/fuse.min.js" integrity="sha256-VzgmKYmhsGNNN4Ph1kMW+BjoYJM2jV5i4IlFoeZA9XI=" crossorigin="anonymous"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/mark.js/8.11.1/jquery.mark.min.js" integrity="sha256-4HLtjeVgH0eIB3aZ9mLYF6E8oU5chNdjU6p6rrXpl9U=" crossorigin="anonymous"></script>
+      
+    
+
+    
+    
+
+    
+    
+    
+    
+
+    <script src="/js/_vendor/bootstrap.bundle.min.f81d0a1705048649befc8b595e455a94.js"></script>
+
+    
+    
+      
+      
+      
+      
+      
+      
+      
+    
+
+    
+    
+    
+    
+    
+    
+    
+    
+      
+      
+    
+    
+    <script src="/en/js/wowchemy.min.e20609e6ad3f7fce339ee2e74f13682b.js"></script>
+
+    
+  <script async defer src="https://buttons.github.io/buttons.js"></script>
+
+
+
+
+</body>
+</html>

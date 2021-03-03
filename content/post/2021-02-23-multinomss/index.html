@@ -1,0 +1,127 @@
+---
+title: Detecting Clusters in Space-Time with multinomss
+author: 'Dillon Corrigan'
+date: '2021-02-23'
+slug: multinomss
+categories: []
+tags: ["stats", "software"]
+subtitle: ''
+summary: ''
+authors: []
+lastmod: '2021-02-23T20:27:01-05:00'
+featured: no
+image:
+  caption: ''
+  focal_point: ''
+  preview_only: no
+projects: ["multinomss"]
+---
+
+
+
+<div id="overview" class="section level2">
+<h2>Overview</h2>
+<p>This post summarizes the capstone (plan B) project I completed as student in the <a href="https://www.sph.umn.edu/academics/divisions/biostatistics/">Division of Biostatistics</a> at the <a href="https://www.sph.umn.edu/">University of Minnesota School of Public Health</a>.</p>
+<p>Spatial and space-time scan statistics are commonly used in epidemiology, veterinary population medicine, and other disciplines that rely on geospatial data to determine whether point processes are random or if clustering of points can be detected. To this end, I developed an R package, <code>multinomss</code>, that implements the multinomial space-time scan statistic and produces easy-to-read results and interactive visualizations. <a href="http://raptor.umn.edu">The Raptor Center</a> (TRC) at the University of Minnesota <a href="http://vetmed.umn.edu">College of Veterinary Medicine</a> conducts research to identify emerging and persistent environmental issues related to raptor health. I will demonstrate the application of <code>multinomss</code> using TRC data and show equivalency to the results obtained via SaTScan, a popular stand-alone software that unfortunately is not open-source. Statistical and computational limitations of the multinomial space-time scan statistic will also be discussed.</p>
+<div id="outline" class="section level3">
+<h3>Outline</h3>
+<ul>
+<li><a href="#introduction">Introduction</a>
+<ul>
+<li><a href="#multinomial">Multinomial Scan Statistic</a></li>
+</ul></li>
+<li><a href="#software">Software Review</a></li>
+<li><a href="#multinomss">Introduction to <code>multinomss</code></a></li>
+<li><a href="#trc">Case Study</a>
+<ul>
+<li><a href="#data">Data</a></li>
+</ul></li>
+<li><a href="#discussion">Discussion</a></li>
+</ul>
+</div>
+</div>
+<div id="introduction" class="section level2">
+<h2>Introduction to the Scan Statistic</h2>
+<p>Broadly, scan statistics comprise a group of methods used to determine whether or not a point process is random. If a point process is not random, this means there is some kind of clustering of the data. Various flavors of scan statistics have been developed to accommodate different distributional assumptions made about the underlying data generating process. This post (and my project) focus on the multinomial scan statistic.</p>
+<p>Scan statistics are applicable to one, two, and three dimensional spaces:</p>
+<ul>
+<li>One-dimensional: points on a line</li>
+<li>Two-dimensional: points on a plane</li>
+<li>Three-dimensional: points on a plane changing over time</li>
+</ul>
+<p>For the two- and three-dimensional cases, these points can be organized into regions of space and/or time called “scanning windows” (<a href="#fig1">fig. 1</a>). These scanning windows are then varied in size and/or height to capture different sets of points for which the scan statistic is calculated.</p>
+<div id="fig1" class="section level3">
+<h3></h3>
+<div class="figure"><span id="fig:unnamed-chunk-2"></span>
+<img src="images/cluster_image.png" alt="Example of Scanning Windows" width="1353" />
+<p class="caption">
+Figure 1: Example of Scanning Windows
+</p>
+</div>
+</div>
+<div id="multinomial" class="section level3">
+<h3>Multinomial Scan Statistic</h3>
+<p>Scan statistics have been applied to Poisson, Bernoulli, exponential, Gaussian/Normal, ordinal, and multinomial data. The simplest case is the Bernoulli scan statistic, which is used when observations belong to one of two categories (often cases vs. controls). The multinomial scan statistic is an extension of this, where observations belong to one of &gt;2 categories (e.g. different types of cancer in a study area).</p>
+<p>The multinomial scan statistic, as detailed by  is simply an extension of the likelihood ratio test statistic. Suppose we are interested in identifying potential clustering of observations within a study area and each observation can belong to one of <span class="math inline">\(K\)</span> different groups. The number of observations in the study area belonging to group <span class="math inline">\(k\)</span> is defined as <span class="math inline">\(C_k\)</span>, where the total number of observations in the study area is <span class="math inline">\(\sum_{k}{C_k} = C\)</span>. Within a given scanning window <span class="math inline">\(Z\)</span>, the number of observations belonging to group <span class="math inline">\(k\)</span> is <span class="math inline">\(C_k(Z)\)</span>. It follows that the total number of observations within scanning window <span class="math inline">\(Z\)</span> is <span class="math inline">\(\sum_k{C_k(Z)} = C(Z)\)</span>. Under the null hypothesis of the likelihood ratio test, the probability of an observation being in group <span class="math inline">\(k\)</span> inside scanning window <span class="math inline">\(Z\)</span> (<span class="math inline">\(p_k\)</span>) is equal to the probability of an observation belonging to group <span class="math inline">\(k\)</span> outside of scanning window <span class="math inline">\(Z\)</span> (<span class="math inline">\(q_k\)</span>) for all <span class="math inline">\(K\)</span> groups:
+<span class="math display">\[H_0: p_1 = q_1, \dots , p_K = q_K. \]</span>
+The alternative hypothesis is that for at least one of the <span class="math inline">\(K\)</span> groups, this equality does not hold. The maximum likelihood estimators of <span class="math inline">\(p_k\)</span> and <span class="math inline">\(q_k\)</span> are simply the proportion of observations in scanning window <span class="math inline">\(Z\)</span> that belong to group <span class="math inline">\(k\)</span> and the proportion of observations not in scanning window <span class="math inline">\(Z\)</span> that belong to group <span class="math inline">\(k\)</span>, respectively:
+<span class="math display">\[\hat{p}_k = \frac{C_k(Z)}{C(Z)} \ \text{and} \ \hat{q}_k = \frac{C_k - C_k(Z)}{C - C(Z)}.\]</span></p>
+<p>The likelihood ratio test statistic for scanning window <span class="math inline">\(Z\)</span> can then be computed to have the form</p>
+<p><span class="math display" id="eq:lrt">\[
+\begin{equation}
+\log \lambda_{Z} = \sum_{k} \left\{ C_k(Z) \log\left( \frac{C_k(Z)}{C(Z)} \right) + (C_k - C_k(Z)) log\left( \frac{C_k - C_k(Z)}{C - C(Z)} \right) \right\} - \sum_{k} C_k log \left( \frac{C_k}{C} \right)
+\tag{1}
+\end{equation}
+\]</span>
+the form shown in Equation <a href="#eq:lrt">(1)</a>
+The scanning window with the largest test statistic <span class="math inline">\(\log \lambda_{Z}\)</span> is the most likely cluster.</p>
+</div>
+</div>
+<div id="software" class="section level2">
+<h2>Review of Existing Software</h2>
+<p>SaTScan is a stand-alone software that was developed by Martin Kulldorff in 1997. This program implements many flavors of the scan statistic, is feature-rich and has been highly optimized over time. However, it is <em>NOT</em> open source. There are some existing <code>R</code> packages that have been developed as an open-source alternative to SaTScan, namely:</p>
+<ul>
+<li><code>smerc</code> (spatial data only)<br />
+</li>
+<li><code>SpatialEpi</code> (spatial data only)<br />
+</li>
+<li><code>Scanstatistics</code> (Bernoulli and Poisson data only)</li>
+</ul>
+<p>For this project, I developed an open source <code>R</code> package that</p>
+</div>
+<div id="multinomss" class="section level2">
+<h2>Introduction to <code>multinomss</code></h2>
+<p>The multinomss package includes functions that allow users to detect spatiotemporal clusters in multinomial data using the retrospective space-time scan statistic. Like the other R packages discussed above, this package integrates  code via   to allay the computational burden inherent to scan statistics. The package also includes functions to produce interactive visualizations of clusters using the <code>leaflet</code> package. Source code for the <code>multinomss</code> package is available on <a href="https://github.com/Dillonicus/multinomss">GitHub</a> and can be installed in <code>R</code> using the <code>devtools</code> package:</p>
+<pre class="r"><code>devtools::install_github(&quot;Dillonicus/multinomss&quot;)</code></pre>
+<p>The analysis pipeline in <code>multinomss</code> consists of three primary steps: (1) identify cylindrical space-time windows through which to scan; (2) determine the most likely cluster; and (3) conduct Monte Carlo simulation for calculation of p-values (<a href="#fig2">fig. 2</a>). These steps can be carried out using the core functions of <code>multinomss</code>.</p>
+<div id="fig2" class="section level3">
+<h3></h3>
+<div class="figure"><span id="fig:unnamed-chunk-4"></span>
+<img src="images/flowchart.png" alt="Analysis pipeline in `multinoms`" width="1736" />
+<p class="caption">
+Figure 2: Analysis pipeline in <code>multinoms</code>
+</p>
+</div>
+</div>
+</div>
+<div id="trc" class="section level2">
+<h2>Case Study</h2>
+<p>The Raptor Center (TRC) at the University of Minnesota College of Veterinary Medicine was established in 1974 as a medical clinic, educational center, and veterinary training facility. In addition to treating around 1,000 sick and injured birds of prey annually, TRC conducts research to identify emerging and persistent environmental issues related to raptor health. Since 1990, TRC has maintained an electronic medical database on rehabilitated animals. These data, along with data from partnering organizations such as the Wildlife Rehabilitation Center of Minnesota (WRC), are invaluable to our understanding of drivers of health in wildlife populations.</p>
+<div id="data" class="section level3">
+<h3>Data</h3>
+<p>The data used in this case study come from a subset of 5,876 raptors that were admitted to TRC between January 2013 and September 2018. Upon admission to TRC, each bird is assigned a unique identification number and the species and admission date are recorded. Some birds also have information about the location from which they were recovered. As this is a space-time analysis, only birds with an associated recovery location are considered in this case study. The final analysis set is comprised of n = 3,810 raptors admitted to TRC between October 2014 and September 2018 for which the recovery location is available. Few isolated observations are located outside of the Upper Midwest (<a href="#fig3">fig. 3</a>). There is no indication that the locations associated with these observations are erroneous. Due to the sparsity of these observations, they are unlikely to be captured in any significant clusters. Inclusion of these points in the analysis will slightly inflate the value of the likelihood ratio statistic under the null hypothesis, but not to an extent that will alter the final results.</p>
+</div>
+<div id="fig3" class="section level3">
+<h3></h3>
+<div class="figure"><span id="fig:unnamed-chunk-5"></span>
+<img src="images/map1.png" alt="Map of data used in analysis" width="725" />
+<p class="caption">
+Figure 3: Map of data used in analysis
+</p>
+</div>
+<p><img src="images/satscan_clustermap.png" width="50%" style="display: inline-block; padding:10px" /><img src="images/multinomss_clustermap.png" width="50%" style="display: inline-block; padding:10px" /></p>
+</div>
+</div>
+<div id="discussion" class="section level2">
+<h2>Discussion</h2>
+</div>

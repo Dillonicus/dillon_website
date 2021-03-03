@@ -1,0 +1,154 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Projects | Dillon Corrigan</title>
+    <link>https://dillonicus.github.io/project/</link>
+      <atom:link href="https://dillonicus.github.io/project/index.xml" rel="self" type="application/rss+xml" />
+    <description>Projects</description>
+    <generator>Wowchemy (https://wowchemy.com)</generator><language>en-us</language><lastBuildDate>Tue, 02 Mar 2021 00:00:00 +0000</lastBuildDate>
+    <image>
+      <url>https://dillonicus.github.io/images/icon_hua2ec155b4296a9c9791d015323e16eb5_11927_512x512_fill_lanczos_center_2.png</url>
+      <title>Projects</title>
+      <link>https://dillonicus.github.io/project/</link>
+    </image>
+    
+    <item>
+      <title>multinomss</title>
+      <link>https://dillonicus.github.io/project/multinomss/</link>
+      <pubDate>Tue, 02 Mar 2021 00:00:00 +0000</pubDate>
+      <guid>https://dillonicus.github.io/project/multinomss/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>CCtemplates</title>
+      <link>https://dillonicus.github.io/project/cctemplates/</link>
+      <pubDate>Wed, 27 Apr 2016 00:00:00 +0000</pubDate>
+      <guid>https://dillonicus.github.io/project/cctemplates/</guid>
+      <description>&lt;h1 id=&#34;cctemplates&#34;&gt;CCtemplates&lt;/h1&gt;
+&lt;!-- badges: start --&gt;
+&lt;!-- badges: end --&gt;
+&lt;p&gt;This R package provides ready-to-use HTML and PDF output formats and templates for RMarkdown documents, with a focus on generating standardized statistical reports for the Cleveland Clinic.&lt;/p&gt;
+&lt;h2 id=&#34;formats-gallery&#34;&gt;Formats gallery&lt;/h2&gt;
+&lt;p&gt;The package provides HTML and PDF output formats. Examples of these will be added later.&lt;/p&gt;
+&lt;h3 id=&#34;html_report&#34;&gt;&lt;code&gt;html_report&lt;/code&gt;&lt;/h3&gt;
+&lt;p&gt;Adapted from the &lt;a href=&#34;https://bookdown.org/&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;bookdown&lt;/a&gt; theme. Fully responsive with a dynamic table of contents and collapsible navigation. Also includes ability to export HTML as a formatted MS Word document using JavaScript.&lt;/p&gt;
+&lt;h3 id=&#34;pdf_report&#34;&gt;&lt;code&gt;pdf_report&lt;/code&gt;&lt;/h3&gt;
+&lt;p&gt;Generates a PDF document with branded header and subject block.&lt;/p&gt;
+&lt;h2 id=&#34;installation&#34;&gt;Installation&lt;/h2&gt;
+&lt;p&gt;The latest version of the package can be downloaded from GitHub:&lt;/p&gt;
+&lt;pre&gt;&lt;code class=&#34;language-r&#34;&gt;install.packages(&#39;remotes&#39;) # if necessary
+remotes::install_github(&amp;quot;dillonicus/CCtemplates&amp;quot;)
+&lt;/code&gt;&lt;/pre&gt;
+&lt;h2 id=&#34;starting-a-new-project&#34;&gt;Starting a new project&lt;/h2&gt;
+&lt;p&gt;To start a new project, simply use the &lt;code&gt;CCtemplates::project_create&lt;/code&gt; function. This function takes various information about the project, generates a unique project ID, then creates a project directory and sub-folders containing pre-populated &lt;code&gt;rmarkdown&lt;/code&gt;, R, and SAS files. A document entitled &amp;lsquo;project_list.csv&amp;rsquo; will also be created in the main directory to track projects created with this function.&lt;/p&gt;
+&lt;p&gt;The function requires several arguments:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;code&gt;project_folder&lt;/code&gt;: Main project folder directory (where all projects are created/stored). Defaults to the default non-project directory in RStudio; and&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;client_name&lt;/code&gt;: Name of the client/PI of the project. Used to generate project ID.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;Additional arguments can be supplied to give more details about the project:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;code&gt;client_email&lt;/code&gt;: Email of the client/PI;&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;statistician_name&lt;/code&gt;: Name of the lead statistician;&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;statistician_email&lt;/code&gt;: Email of the lead statistician;&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;programmer&lt;/code&gt;: Name of the statistical programmer (if applicable);&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;department&lt;/code&gt;: Indicates which department the project is for. This will create a sub-folder within the main project directory if one does not already exist;&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;project_title&lt;/code&gt;: Optional title for the project;&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;start_date&lt;/code&gt;: Start date of the project. Default is today&amp;rsquo;s date;&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;version&lt;/code&gt;: Version number of the project. Default is &amp;lsquo;1.0&amp;rsquo;;&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;notes&lt;/code&gt;: Any general notes about the project; and&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;output_format&lt;/code&gt;: Changes the output format of the &lt;code&gt;rmarkdown&lt;/code&gt; file created in the &amp;lsquo;memo&amp;rsquo; folder. Options are &amp;lsquo;html&amp;rsquo; (default) or &amp;lsquo;pdf&amp;rsquo;.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;pre&gt;&lt;code class=&#34;language-r&#34;&gt;CCtemplates::project_create(
+  project_folder = &amp;quot;~/&amp;quot;, 
+  start_date = Sys.Date(), 
+  client_name = &amp;quot;Client Name&amp;quot;, 
+  client_email = &amp;quot;client_name@ccf.org&amp;quot;,
+  statistician_name = &amp;quot;Dillon Corrigan&amp;quot;, 
+  statistician_email = &amp;quot;corrigand3@ccf.org&amp;quot;, 
+  programmer = &amp;quot;Programmer Name&amp;quot;, 
+  version = &amp;quot;1.0&amp;quot;, 
+  department = &amp;quot;GUKI&amp;quot;, 
+  project_title = &amp;quot;Test Project&amp;quot;, 
+  output_format = &amp;quot;html&amp;quot;, 
+  notes = &amp;quot;This is not a real project&amp;quot;
+  )
+&lt;/code&gt;&lt;/pre&gt;
+&lt;h2 id=&#34;removing-a-completed-project&#34;&gt;Removing a completed project&lt;/h2&gt;
+&lt;p&gt;Projects can also be archived and/or deleted from the main project file using the &lt;code&gt;CCtemplates::project_remove&lt;/code&gt; function.&lt;/p&gt;
+&lt;p&gt;The function requires several arguments:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;code&gt;project_folder&lt;/code&gt;: Main project folder directory (where all projects are created/stored). Defaults to the default non-project directory in RStudio; and&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;project_id&lt;/code&gt;: The ID of the project you wish to archive/remove. This is stored and looked up in the &amp;lsquo;project_list.csv&amp;rsquo; file created by &lt;code&gt;CCtemplates::project_create()&lt;/code&gt;.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;An additional argument, &lt;code&gt;keep_zip&lt;/code&gt;, indicates whether you would like to archive the project prior to deletion. If set to &lt;code&gt;TRUE&lt;/code&gt; (default), all project files will be added to a .zip archive and copied to a sub-folder of the main project folder directory called &amp;lsquo;Completed.&amp;rsquo; If set to &lt;code&gt;FALSE&lt;/code&gt;, no archive will be made and all files will be deleted. If set to &lt;code&gt;FALSE&lt;/code&gt; the user will be prompted twice to confirm deletion without archive before proceeding.&lt;/p&gt;
+&lt;pre&gt;&lt;code class=&#34;language-r&#34;&gt;CCtemplates::project_remove(
+  project_folder = &amp;quot;~/Projects&amp;quot;,
+  project_id = &amp;quot;D1234&amp;quot;,
+  keep_zip = TRUE
+  )
+&lt;/code&gt;&lt;/pre&gt;
+&lt;h2 id=&#34;creating-a-new-document&#34;&gt;Creating a new document&lt;/h2&gt;
+&lt;p&gt;Create a new &lt;code&gt;Rmd&lt;/code&gt; file and add the following to the YAML preamble:&lt;/p&gt;
+&lt;pre&gt;&lt;code class=&#34;language-r&#34;&gt;---
+output: CCtemplates::&amp;lt;template name&amp;gt;
+---
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;Within RStudio, you can also choose &lt;code&gt;File&lt;/code&gt; &amp;gt; &lt;code&gt;New File...&lt;/code&gt; &amp;gt; &lt;code&gt;R Markdown...&lt;/code&gt; then select &lt;code&gt;From Template&lt;/code&gt;. You should then be able to create a new document from one of the package templates.&lt;/p&gt;
+&lt;h2 id=&#34;options&#34;&gt;Options&lt;/h2&gt;
+&lt;p&gt;Depending on output format, additional metadata and output options can be specified in the YAML preamble.&lt;/p&gt;
+&lt;h3 id=&#34;metadata&#34;&gt;Metadata&lt;/h3&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;code&gt;title&lt;/code&gt;&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;date&lt;/code&gt;&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;project&lt;/code&gt;&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;version&lt;/code&gt;&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;client&lt;/code&gt;: PI for project. Name and email can be specified as list of entries under the &lt;code&gt;client&lt;/code&gt; field.&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;statistician&lt;/code&gt;: Statistician preparing report. Name and email can be specified as a list of entries under the &lt;code&gt;statistician&lt;/code&gt; field.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id=&#34;output-formatting&#34;&gt;Output formatting&lt;/h3&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;code&gt;fig_width&lt;/code&gt;: figures width, in inches&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;fig_height&lt;/code&gt;: figures width, in inches&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;fig_caption&lt;/code&gt;: toggle figure caption rendering&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;highlight&lt;/code&gt;: syntax highlighting&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;thumbnails&lt;/code&gt;: if TRUE, display content images as thumbnails&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;lightbox&lt;/code&gt;: if TRUE, add lightbox effect to content images&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;gallery&lt;/code&gt;: if TRUE, add navigation between images when displayed in lightbox&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;use_bookdown&lt;/code&gt;: if TRUE, will use &lt;code&gt;bookdown&lt;/code&gt; instead of &lt;code&gt;rmarkdown&lt;/code&gt; for HTML rendering (adds section numbering and cross-referencing)&lt;/li&gt;
+&lt;/ul&gt;
+&lt;pre&gt;&lt;code class=&#34;language-r&#34;&gt;---
+title: &amp;quot;Test Project&amp;quot;
+date: &amp;quot;`r Sys.Date()`&amp;quot;
+project: 
+ - id: &amp;quot;D1234&amp;quot;
+version: &amp;quot;1.0&amp;quot;
+client: 
+ - name: &amp;quot;Client Name&amp;quot;
+   email: &amp;quot;client_name@ccf.org&amp;quot;
+statistician: 
+ - name: &amp;quot;Dillon Corrigan&amp;quot;
+   email: &amp;quot;corrigd3@ccf.org&amp;quot;
+output: CCtemplates::html_report
+---
+&lt;/code&gt;&lt;/pre&gt;
+&lt;h2 id=&#34;credits&#34;&gt;Credits&lt;/h2&gt;
+&lt;ul&gt;
+&lt;li&gt;The CSS for &lt;code&gt;html_report&lt;/code&gt; is directly derived from the &lt;a href=&#34;https://bookdown.org&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;bookdown&lt;/a&gt; project template.&lt;/li&gt;
+&lt;li&gt;JavaScript and HTML code for code folding and tabbed sections are taken from RStudio&amp;rsquo;s default &lt;code&gt;rmarkdown&lt;/code&gt; HTML template.&lt;/li&gt;
+&lt;li&gt;The &lt;a href=&#34;https://github.com/juba/rmdformats&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;rmdformats&lt;/a&gt; package served as a general reference for the &lt;code&gt;html_report&lt;/code&gt; format.&lt;/li&gt;
+&lt;/ul&gt;
+</description>
+    </item>
+    
+    <item>
+      <title>Minneapolis Crime Dashboard</title>
+      <link>https://dillonicus.github.io/project/mpls-crime/</link>
+      <pubDate>Wed, 27 Apr 2016 00:00:00 +0000</pubDate>
+      <guid>https://dillonicus.github.io/project/mpls-crime/</guid>
+      <description></description>
+    </item>
+    
+  </channel>
+</rss>
